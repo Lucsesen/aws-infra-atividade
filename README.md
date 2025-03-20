@@ -1,49 +1,4 @@
-# aws-infra-atividade
 
-Primeiramente eu criei o Security Group para EC2 com nome de SegurancaAwsIFF liberando o acesso para o ssh na porta 22 pro meu ip pessoal conforme solicitado, além de liberar o http pra porta 80.
-
-![image](https://github.com/user-attachments/assets/7c5d03ba-3cc7-4257-b707-53195fe1b6b4)
-
-Também configurei o Security Group para RDS com o nome de RDS-IFF configurando a conexão, permitindo apenas postgresql para a EC2
-![RDS](https://github.com/user-attachments/assets/11649bf7-b5bc-4c2d-bee6-0114699c7ad7)
-
-Criei uma Instância EC2 Utilizando a AMI Amazon Linux e Associei o Security Group criado para a SegurancaAwsIFF.
-Também criei um par de chaves com nome de ChaveAwsIFFSSH (arquivo .pem)
-
-criei um Banco de Dados via RDS (PostgreSQL) selecionando o motor postgres e configurei usuario, senha e banco conforme imagem abaixo. Anotei a informação do endpoint
-
-![db](https://github.com/user-attachments/assets/e5f4695e-2fe8-48b1-bf4e-67d18f2ca9a5)
-
-acessei a pasta de trabalho da senha.pem
-icacls "ChaveAwsIFFSSH.pem" /inheritance :r
-
-
-whoami para saber meu nome e configurar corretamente
-
-icacls "ChaveAwsIFFSSH.pem" /inheritance:r /grant:r "casa\range:R"
-
-para conectar a dns publico utilizei o comando abaixo
-
-ssh -i "ChaveAwsIFFSSH.pem" ec2-user@ec2-3-83-98-175.compute-1.amazonaws.com
-![image](https://github.com/user-attachments/assets/16b249bd-5dc3-44e8-97bb-dc8a690a1a3d)
-
-
-instalei o postgresql com o comando abaixo
-sudo dnf install -y postgresql16 postgresql16-server
-
-![image](https://github.com/user-attachments/assets/ccfbed9e-edc8-4187-8c9f-4f44fe053568)
-
-
-Conectei ao bd com o comando abaixo, além de digitar a minha senha
-psql -h database-iff-aws.cafy4kwoowbg.us-east-1.rds.amazonaws.com -U adm -d dbAwsIff -p 5432 -W
-
-![image](https://github.com/user-attachments/assets/e2c406a7-5c14-416a-8138-03370486bc9b)
-
-dei select somente para validar a conexão com o banco
-
-
-
-/*/*/*/
 # aws-infra-atividade
 
 Primeiramente eu criei o **Security Group** para EC2 com o nome de `SegurancaAwsIFF`, liberando o acesso para o **SSH** na porta **22** para o meu IP pessoal, conforme solicitado, além de liberar o **HTTP** na porta **80**.
